@@ -4,7 +4,7 @@ import type { Movie } from "../types/movie";
 interface TMDBResponse {
   results: Movie[];
   page: number;
-  total_page: number;
+  total_pages: number;
   total_results: number;
 }
 
