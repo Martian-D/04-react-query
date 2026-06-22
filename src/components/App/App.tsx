@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import SearchBar from "../SearchBar/SearchBar";
 
-import type { Movie } from "../../../types/movie";
+import type { Movie } from "../../types/movie";
 import { fetchMovies } from "../../services/movieService";
 
 function App() {
