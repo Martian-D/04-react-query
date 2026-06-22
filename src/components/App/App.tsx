@@ -44,7 +44,7 @@ function App() {
     getMovies();
   }, [query]);
   return (
-    <>
+    <div className={css.container}>
       <SearchBar onSubmit={handleSearch} />
       <Toaster position="top-right" reverseOrder={false} />
       {isLoading && <Loader />}
@@ -58,7 +58,7 @@ function App() {
           onClose={() => setSelectedMovie(null)}
         />
       )}
-    </>
+    </div>
   );
 }
 
