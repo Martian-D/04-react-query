@@ -1,5 +1,5 @@
-import { Toaster } from "react-hot-toast";
-import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
 import css from "./App.module.css";
 import MovieModal from "../MovieModal/MovieModal";
 
@@ -7,7 +7,6 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import SearchBar from "../SearchBar/SearchBar";
-import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
 
 import type { Movie } from "../../types/movie";
 import { fetchMovies } from "../../services/movieService";
@@ -39,15 +38,18 @@ function App() {
   };
   const movies = data?.results ?? [];
   const totalPages = data?.total_pages ?? 0;
-  const isNotFound =
-    data && movies.length === 0 && !isLoading && !isError && query !== "";
+  useEffect(() => {
+    if (data && movies.length === 0 && query !== "") {
+      toast.error("No movies found for your request.");
+    }
+  }, [data, query, movies.length]);
 
   return (
     <div className={css.container}>
       <SearchBar onSubmit={handleSearch} />
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
-      {isNotFound && <NotFoundMessage />}
+
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={setSelectedMovie} />
       )}
