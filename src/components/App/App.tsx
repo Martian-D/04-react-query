@@ -40,7 +40,7 @@ function App() {
   const totalPages = data?.total_pages ?? 0;
   useEffect(() => {
     if (data && movies.length === 0 && query !== "") {
-      toast.error("No movies found for your request.");
+      toast.error("No movies found for your request.", { id: "not-found" });
     }
   }, [data, query, movies.length]);
 
